@@ -12,6 +12,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+const char *usage = ""
+"sel: [-t timeout] [-r fd,fd,...] [-w fd,fd,...] [-e fd,fd,...]\n"
+"  -t timeout - Timeout for select call.  No timeout if negative.\n"
+"               Decimal fractions okay.\n"
+"  -r fd...   - Comma separated list of fildes numbers to wait\n"
+"               for read operations.\n"
+"  -w -e      - Same as -r but for write operations (-w) and\n"
+"               error conditions (-e).\n";
+
 int sel_string(char *rs,
   char *ws, char *es, double timeout);
 
@@ -37,6 +46,7 @@ main(int argc, char **argv)
                 t = optarg;
                 break;
             case '?':
+                fprintf(stderr, "%s", usage);
                 return 99;
         }
     }
